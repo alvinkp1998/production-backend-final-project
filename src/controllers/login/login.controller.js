@@ -1,12 +1,10 @@
 const { users } = require("../../models");
-const { compareSync } = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const service = async function (req, res, next) {
   try {
     const { email, password } = req.body;
-    const user = await users.findOne({ where: { email } });
-    const validUser = compareSync(req.body.password, user.password);
+    const validUser = await users.findOne({ where: { email } });
     if (!validUser)
       return res.json({ msg: "Email atau password tidak sesuai" });
     if (validUser.password !== password)
