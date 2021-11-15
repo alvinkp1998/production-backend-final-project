@@ -7,8 +7,7 @@ const service = async function (req, res, next) {
       where.id = req.auth.id;
     }
     const requestDB = await users.findAll({ where });
-    if (!req.auth.id)
-      return res.json({ msg: "data semua user", data: requestDB });
+    if (!req.auth) return res.json({ msg: "data semua user", data: requestDB });
     else {
       if (requestDB.length < 1) {
         return res.status(404).json({ msg: "User tidak ditemukan" });

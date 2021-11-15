@@ -1,5 +1,11 @@
 const jwt = require("jsonwebtoken");
 
+const createJWT = (user) => {
+  delete user.dataValues.password;
+  const token = jwt.sign(user.dataValues, "secret-key");
+  return token;
+};
+
 const checkJWT = (req, res, next) => {
   const token = req.get("Authorization");
   if (!token) {
@@ -16,4 +22,4 @@ const checkJWT = (req, res, next) => {
   }
 };
 
-module.exports = { checkJWT };
+module.exports = { checkJWT, createJWT };
