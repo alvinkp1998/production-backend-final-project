@@ -8,8 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ users, alamat, sosialMedia, kelas }) {
+      users.belongsTo(alamat);
+      users.belongsTo(sosialMedia);
+      users.belongsToMany(kelas, { through: "joinKelas" });
     }
   }
   users.init(
@@ -24,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       tanggalLahir: DataTypes.DATEONLY,
       foto: DataTypes.STRING,
       noHp: DataTypes.INTEGER(12),
-      alamat: DataTypes.STRING,
       email: DataTypes.STRING,
       password: {
         type: DataTypes.STRING(12),
