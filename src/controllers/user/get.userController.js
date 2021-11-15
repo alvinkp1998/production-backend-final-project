@@ -3,11 +3,11 @@ const { users } = require("../../models");
 const service = async function (req, res, next) {
   try {
     const where = {};
-    if (req.params.id) {
-      where.id = req.params.id;
+    if (req.auth.id) {
+      where.id = req.auth.id;
     }
     const requestDB = await users.findAll({ where });
-    if (!req.params.id)
+    if (!req.auth.id)
       return res.json({ msg: "data semua user", data: requestDB });
     else {
       if (requestDB.length < 1) {
