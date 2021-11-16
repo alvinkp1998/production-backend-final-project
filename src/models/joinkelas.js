@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      userId: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+      },
+      kelaId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      },
     },
     {
       sequelize,
