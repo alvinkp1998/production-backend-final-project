@@ -7,26 +7,23 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ joinKelas, sesi, role }) {
+    static associate({ joinKelas, sesi, role, kelas, users }) {
       joinKelas.belongsToMany(sesi, { through: "presensi" });
-      joinKelas.hasMany(role);
+      joinKelas.belongsTo(role);
+      joinKelas.belongsTo(kelas, { foreignKey: "kelasId" });
+      joinKelas.belongsTo(users);
     }
   }
   joinKelas.init(
     {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-      },
       userId: {
         type: DataTypes.UUID,
-        primaryKey: true,
       },
-      kelaId: {
+      kelasId: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
+      },
+      roleId: {
+        type: DataTypes.INTEGER,
       },
     },
     {

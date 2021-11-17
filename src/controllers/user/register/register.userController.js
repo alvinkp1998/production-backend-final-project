@@ -1,4 +1,4 @@
-const { users } = require("../../models");
+const { users } = require("../../../models");
 
 const service = async function (req, res, next) {
   try {

@@ -1,5 +1,5 @@
-const { users } = require("../../models");
-const { createJWT } = require("../../middlewares/jwt");
+const { users } = require("../../../models");
+const { createJWT } = require("../../../middlewares/jwt");
 // const { compareSync } = require("bcrypt");
 
 const service = async function (req, res, next) {

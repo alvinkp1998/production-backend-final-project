@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ role, joinKelas }) {
-      role.belongsTo(joinKelas);
+      role.hasMany(joinKelas);
     }
   }
   role.init(

@@ -1,6 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 const { genSaltSync, hashSync } = require("bcrypt");
+
 module.exports = (sequelize, DataTypes) => {
   class users extends Model {
     /**
@@ -8,10 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ users, alamat, sosialMedia, kelas }) {
+    static associate({ users, alamat, sosialMedia, kelas, joinKelas }) {
       users.belongsTo(alamat);
       users.belongsTo(sosialMedia);
-      users.belongsToMany(kelas, { through: "joinKelas" });
+      // users.belongsToMany(kelas, { through: "joinKelas" });
+      users.hasMany(joinKelas);
     }
   }
   users.init(
