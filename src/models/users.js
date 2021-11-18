@@ -3,20 +3,20 @@ const { Model } = require("sequelize");
 const { genSaltSync, hashSync } = require("bcrypt");
 
 module.exports = (sequelize, DataTypes) => {
-  class users extends Model {
+  class Users extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ users, alamat, sosialMedia, kelas, joinKelas }) {
-      users.belongsTo(alamat);
-      users.belongsTo(sosialMedia);
-      // users.belongsToMany(kelas, { through: "joinKelas" });
-      users.hasMany(joinKelas);
+    static associate({ Users, Address, MediaSocial, Classes, JoinClasses }) {
+      Users.belongsTo(Address);
+      Users.belongsTo(MediaSocial);
+      Users.belongsToMany(Classes, { through: "JoinClasses" });
+      // Users.hasMany(JoinClasses);
     }
   }
-  users.init(
+  Users.init(
     {
       id: {
         type: DataTypes.UUID,
@@ -42,8 +42,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "users",
+      modelName: "Users",
     }
   );
-  return users;
+  return Users;
 };

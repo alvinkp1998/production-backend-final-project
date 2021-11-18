@@ -1,9 +1,9 @@
-const { sesi } = require("../../models");
+const { Sessions } = require("../../models");
 
 const service = async function (req, res, next) {
   try {
     const where = { id: req.params.id };
-    const requestDB = await sesi.destroy({ where });
+    const requestDB = await Sessions.destroy({ where });
     if (requestDB) {
       return res.json({ msg: "Sesi berhasil dihapus" });
     } else {

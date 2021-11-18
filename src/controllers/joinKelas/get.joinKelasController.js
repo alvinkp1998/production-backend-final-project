@@ -1,9 +1,14 @@
-const { kelas, joinKelas } = require("../../models");
+const { Classes, JoinClasses } = require("../../models");
 
 const service = async function (req, res, next) {
   try {
-    const data = await kelas.findAll({
-      include: { model: joinKelas, where: { userId: req.auth.id } },
+    const data = await JoinClasses.findAll({
+      where: { UserId: req.auth.id },
+      attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+      include: {
+        model: Classes,
+        attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+      },
     });
 
     return res.json({ msg: "sukses", data: data });

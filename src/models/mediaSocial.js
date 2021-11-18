@@ -1,18 +1,17 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class kecamatan extends Model {
+  class MediaSocial extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ kecamatan, alamat, kota }) {
-      kecamatan.hasMany(alamat);
-      kecamatan.belongsTo(kota);
+    static associate({ MediaSocial, Users }) {
+      MediaSocial.hasOne(Users);
     }
   }
-  kecamatan.init(
+  MediaSocial.init(
     {
       id: {
         allowNull: false,
@@ -20,12 +19,15 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      namaKecamatan: DataTypes.STRING,
+      instagram: { type: DataTypes.STRING, allowNull: true },
+      linkedin: { type: DataTypes.STRING, allowNull: true },
+      twitter: { type: DataTypes.STRING, allowNull: true },
+      facebook: { type: DataTypes.STRING, allowNull: true },
     },
     {
       sequelize,
-      modelName: "kecamatan",
+      modelName: "MediaSocial",
     }
   );
-  return kecamatan;
+  return MediaSocial;
 };

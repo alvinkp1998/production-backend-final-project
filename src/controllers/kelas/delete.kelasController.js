@@ -1,13 +1,13 @@
-const { kelas } = require("../../models");
+const { Classes } = require("../../models");
 
 const service = async function (req, res, next) {
   try {
     const where = { id: req.params.id };
-    const requestDB = await kelas.destroy({ where });
+    const requestDB = await Classes.destroy({ where });
     if (requestDB) {
-      return res.json({ msg: "Kelas berhasil dihapus" });
+      return res.json({ msg: "Classes berhasil dihapus" });
     } else {
-      return res.status(404).json({ msg: "Kelas gagal dihapus" });
+      return res.status(404).json({ msg: "Classes gagal dihapus" });
     }
   } catch (error) {
     return res.status(500).json({ msg: error.toString() });

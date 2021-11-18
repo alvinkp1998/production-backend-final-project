@@ -4,11 +4,12 @@ const createSesi = require("./create.sesiController");
 const deleteSesi = require("./delete.sesiController");
 const getSesi = require("./get.sesiController");
 const updateSesi = require("./update.sesiController");
+const userJWT = require("../../middlewares/jwt");
 
-router.get("/", getSesi.service);
-router.get("/:id", getSesi.service);
-router.post("/", createSesi.service);
-router.put("/:id", updateSesi.service);
-router.delete("/:id", deleteSesi.service);
+router.get("/", userJWT.checkJWT, getSesi.service);
+router.get("/:id", userJWT.checkJWT, getSesi.service);
+router.post("/", userJWT.checkJWT, createSesi.service);
+router.put("/:id", userJWT.checkJWT, updateSesi.service);
+router.delete("/:id", userJWT.checkJWT, deleteSesi.service);
 
 module.exports = router;

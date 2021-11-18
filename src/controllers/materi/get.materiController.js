@@ -1,4 +1,4 @@
-const { materi } = require("../../models");
+const { Materials, Sessions } = require("../../models");
 
 const service = async function (req, res, next) {
   try {
@@ -6,13 +6,22 @@ const service = async function (req, res, next) {
     if (req.params.id) {
       where.id = req.params.id;
     }
-    const requestDB = await materi.findAll({
+    const requestDB = await Materials.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+      include: [
+        {
+          model: Sessions,
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "deletedAt"],
+          },
+        },
+      ],
       where,
     });
-    if (!req.params.id) return res.json(requestDB);
+    if (!req.params.id) return res.json({ msg: "success", data: requestDB });
     else {
       if (requestDB.length < 1) {
-        return res.status(404).json({ msg: "Materi tidak ditemukan" });
+        return res.status(404).json({ msg: "Materials tidak ditemukan" });
       } else {
         return res.json(requestDB[0]);
       }

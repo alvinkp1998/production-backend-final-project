@@ -1,4 +1,4 @@
-const { kelas } = require("../../models");
+const { Classes } = require("../../models");
 
 const service = async function (req, res, next) {
   try {
@@ -6,13 +6,18 @@ const service = async function (req, res, next) {
     if (req.params.id) {
       where.id = req.params.id;
     }
-    const requestDB = await kelas.findAll({
+    const requestDB = await Classes.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
       where,
     });
     if (!req.params.id) return res.json({ msg: "success", requestDB });
     else {
       if (requestDB.length < 1) {
-        return res.status(404).json({ msg: "Kelas tidak ditemukan" });
+        if (req.params.id == "sesi") {
+          next();
+        } else {
+          return res.status(404).json({ msg: "Classes tidak ditemukan" });
+        }
       } else {
         return res.json(requestDB[0]);
       }

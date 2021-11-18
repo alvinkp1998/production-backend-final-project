@@ -1,17 +1,17 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class sosialMedia extends Model {
+  class Materials extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ sosialMedia, users }) {
-      sosialMedia.hasOne(users);
+    static associate({ Materials, Sessions }) {
+      Materials.belongsTo(Sessions);
     }
   }
-  sosialMedia.init(
+  Materials.init(
     {
       id: {
         allowNull: false,
@@ -19,15 +19,14 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      instagram: { type: DataTypes.STRING, allowNull: true },
-      linkedin: { type: DataTypes.STRING, allowNull: true },
-      twitter: { type: DataTypes.STRING, allowNull: true },
-      facebook: { type: DataTypes.STRING, allowNull: true },
+      namaMateri: DataTypes.STRING,
+      file: DataTypes.STRING,
+      jenisMateri: DataTypes.ENUM(["recording", "powerpoint"]),
     },
     {
       sequelize,
-      modelName: "sosialMedia",
+      modelName: "Materials",
     }
   );
-  return sosialMedia;
+  return Materials;
 };

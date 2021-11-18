@@ -2,19 +2,19 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class kelas extends Model {
+  class Classes extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ kelas, users, sesi, joinKelas }) {
-      // kelas.belongsToMany(users, { through: "joinKelas" });
-      kelas.hasMany(sesi);
-      kelas.hasMany(joinKelas, { foreignKey: "kelasId" });
+    static associate({ Classes, Users, Sessions, JoinClasses }) {
+      Classes.belongsToMany(Users, { through: "JoinClasses" });
+      Classes.hasMany(Sessions);
+      // Classes.hasMany(JoinClasses);
     }
   }
-  kelas.init(
+  Classes.init(
     {
       id: {
         allowNull: false,
@@ -31,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "kelas",
+      modelName: "Classes",
     }
   );
-  return kelas;
+  return Classes;
 };

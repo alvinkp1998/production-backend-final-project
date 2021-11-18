@@ -1,35 +1,37 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class joinKelas extends Model {
+  class JoinClasses extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ joinKelas, sesi, role, kelas, users }) {
-      joinKelas.belongsToMany(sesi, { through: "presensi" });
-      joinKelas.belongsTo(role);
-      joinKelas.belongsTo(kelas, { foreignKey: "kelasId" });
-      joinKelas.belongsTo(users);
+    static associate({ JoinClasses, Sessions, Roles, Classes, Users }) {
+      // JoinClasses.belongsToMany(Sessions, { through: "presensi" });
+      // JoinClasses.belongsTo(Roles);
+      JoinClasses.belongsTo(Classes);
+      // JoinClasses.belongsTo(Users);
     }
   }
-  joinKelas.init(
+  JoinClasses.init(
     {
-      userId: {
+      UserId: {
         type: DataTypes.UUID,
+        primaryKey: true,
       },
-      kelasId: {
+      ClassId: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
       },
-      roleId: {
+      RoleId: {
         type: DataTypes.INTEGER,
       },
     },
     {
       sequelize,
-      modelName: "joinKelas",
+      modelName: "JoinClasses",
     }
   );
-  return joinKelas;
+  return JoinClasses;
 };
