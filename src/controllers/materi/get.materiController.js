@@ -4,7 +4,7 @@ const service = async function (req, res, next) {
   try {
     const where = {};
     if (req.params.id) {
-      where.id = req.params.id;
+      where.SessionId = req.params.id;
     }
     const requestDB = await Materials.findAll({
       attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
@@ -23,7 +23,7 @@ const service = async function (req, res, next) {
       if (requestDB.length < 1) {
         return res.status(404).json({ msg: "Materials tidak ditemukan" });
       } else {
-        return res.json(requestDB[0]);
+        return res.json(requestDB);
       }
     }
   } catch (error) {

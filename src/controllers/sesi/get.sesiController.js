@@ -4,7 +4,7 @@ const service = async function (req, res, next) {
   try {
     const where = {};
     if (req.params.id) {
-      where.id = req.params.id;
+      where.ClassId = req.params.id;
     }
     const requestDB = await Sessions.findAll({
       where,
@@ -25,7 +25,10 @@ const service = async function (req, res, next) {
       if (requestDB.length < 1) {
         return res.status(404).json({ msg: "Sessions tidak ditemukan" });
       } else {
-        return res.json(requestDB[0]);
+        return res.json({
+          msg: `success`,
+          data: requestDB,
+        });
       }
     }
   } catch (error) {
