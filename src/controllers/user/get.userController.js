@@ -1,23 +1,31 @@
-const { Users } = require("../../models");
+const { Users, Classes } = require("../../models");
 
 const service = async function (req, res, next) {
   try {
     const where = {};
-    if (req.auth.id) {
+    if (req.auth) {
       where.id = req.auth.id;
+    } else {
+      const requestDB = await Users.findAll({
+        where,
+        attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+      });
+      return res.json({ msg: "data semua user", data: requestDB });
     }
-    console.log(where);
+
     const requestDB = await Users.findAll({
       where,
       attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+      // include: {
+      //   model: Classes,
+      //   attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+      // },
     });
-    if (!req.auth) return res.json({ msg: "data semua user", data: requestDB });
-    else {
-      return res.json({
-        msg: "data berhasil diterima.",
-        data: requestDB[0],
-      });
-    }
+    return res.json({
+      msg: "data user berhasil diterima.",
+      data: requestDB[0],
+    });
+
     // else {
     //   if (requestDB.length < 1) {
     //     return res.status(404).json({ msg: "User tidak ditemukan" });

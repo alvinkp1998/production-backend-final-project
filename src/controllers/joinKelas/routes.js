@@ -6,6 +6,7 @@ const leaveJoinKelas = require("./leave.joinKelasController");
 const userJWT = require("../../middlewares/jwt");
 
 router.get("/", userJWT.checkJWT, getJoinKelas.service);
+router.get("/:id", userJWT.checkJWT, getJoinKelas.service);
 router.post("/", userJWT.checkJWT, createJoinKelas.service);
 router.delete("/:id", userJWT.checkJWT, leaveJoinKelas.service);
 

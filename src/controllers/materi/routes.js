@@ -4,11 +4,12 @@ const createMateri = require("./create.materiController");
 const deleteMateri = require("./delete.materiController");
 const getMateri = require("./get.materiController");
 const updateMateri = require("./update.materiController");
+const userJWT = require("../../middlewares/jwt");
 
-router.get("/", getMateri.service);
-router.get("/:id", getMateri.service);
-router.post("/", createMateri.service);
-router.put("/:id", updateMateri.service);
-router.delete("/:id", deleteMateri.service);
+router.get("/", userJWT.checkJWT, getMateri.service);
+router.get("/:id", userJWT.checkJWT, getMateri.service);
+router.post("/", userJWT.checkJWT, createMateri.service);
+router.put("/:id", userJWT.checkJWT, updateMateri.service);
+router.delete("/:id", userJWT.checkJWT, deleteMateri.service);
 
 module.exports = router;

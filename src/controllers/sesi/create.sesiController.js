@@ -2,8 +2,9 @@ const { Sessions } = require("../../models");
 
 const service = async function (req, res, next) {
   try {
+    const where = { Classid: req.params.id };
     const data = req.body;
-    const requestDB = await Sessions.create(data);
+    const requestDB = await Sessions.create(data, where);
     if (requestDB) {
       return res.json({ msg: "Sesi berhasil dibuat", data: requestDB });
     } else {
