@@ -10,18 +10,20 @@ const service = async function (req, res, next) {
       attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
       where,
     });
-    if (!req.params.id) return res.json({ msg: "success", requestDB });
-    else {
-      if (requestDB.length < 1) {
-        if (req.params.id == "sesi") {
-          next();
-        } else {
-          return res.status(404).json({ msg: "Classes tidak ditemukan" });
-        }
-      } else {
-        return res.json(requestDB[0]);
-      }
-    }
+
+    return res.json(requestDB);
+    // if (!req.params.id) return res.json({ msg: "success", requestDB });
+    // else {
+    //   if (requestDB.length < 1) {
+    //     if (req.params.id == "sesi") {
+    //       next();
+    //     } else {
+    //       return res.status(404).json({ msg: "Classes tidak ditemukan" });
+    //     }
+    //   } else {
+    //     return res.json(requestDB[0]);
+    //   }
+    // }
   } catch (error) {
     return res.status(500).json({ msg: error.toString() });
   }

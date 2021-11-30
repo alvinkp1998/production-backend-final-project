@@ -7,6 +7,7 @@ const kelasRoutes = require("../controllers/kelas/routes");
 const joinKelasRoutes = require("../controllers/joinKelas/routes");
 const sesiRoutes = require("../controllers/sesi/routes");
 const materiRoutes = require("../controllers/materi/routes");
+const profileRoutes = require("../controllers/user/profile/routes");
 
 router.use("/register", registerRoutes);
 router.use("/login", loginRoutes);
@@ -15,5 +16,6 @@ router.use("/kelas", kelasRoutes);
 router.use("/join", joinKelasRoutes);
 router.use("/sesi", sesiRoutes);
 router.use("/materi", materiRoutes);
+router.use("/profile", profileRoutes);
 
 module.exports = router;

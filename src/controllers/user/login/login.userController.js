@@ -7,11 +7,14 @@ const service = async function (req, res, next) {
     const user = await Users.findOne({
       where: { email: req.body.email },
     });
+    // const user = await Users.findOne({
+    //   where: { email: req.body.email },
+    // });
     // const validUser = compareSync(req.body.password, user.password);
     // if (validUser) return res.json({ msg: "success", token: createJWT(user) });
-    // if (!validUser) return res.json({ msg: "Email atau password tidak sesuai" });
-    // if (validUser.password !== password)
-    //   return res.json({ msg: "Email atau password tidak sesuai" });
+    // else {
+    //   return res.status(404).json({ msg: "Email atau password tidak sesuai" });
+    // }
     if (user) return res.json({ msg: "success", token: createJWT(user) });
     if (!user) return res.json({ msg: "Email atau password tidak sesuai" });
   } catch (error) {

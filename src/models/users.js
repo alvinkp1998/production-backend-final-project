@@ -27,12 +27,12 @@ module.exports = (sequelize, DataTypes) => {
       tempatLahir: DataTypes.STRING,
       tanggalLahir: DataTypes.DATEONLY,
       foto: DataTypes.STRING,
-      noHp: DataTypes.INTEGER(12),
+      noHp: DataTypes.STRING(12),
       email: DataTypes.STRING,
       password: {
-        type: DataTypes.STRING(12),
-        set(val) {
-          this.setDataValue("password", hashSync(val, genSaltSync(10)));
+        type: DataTypes.STRING,
+        set(value) {
+          this.setDataValue("password", hashSync(value, genSaltSync(10)));
         },
       },
       pendidikanTerakhir: DataTypes.STRING,

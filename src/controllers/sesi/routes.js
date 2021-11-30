@@ -7,7 +7,7 @@ const updateSesi = require("./update.sesiController");
 const userJWT = require("../../middlewares/jwt");
 
 router.get("/", userJWT.checkJWT, getSesi.service);
-router.get("/:id", userJWT.checkJWT, getSesi.service);
+router.get("/:classId", userJWT.checkJWT, getSesi.service);
 router.post("/", userJWT.checkJWT, createSesi.service);
 router.put("/:id", userJWT.checkJWT, updateSesi.service);
 router.delete("/:id", userJWT.checkJWT, deleteSesi.service);
