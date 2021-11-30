@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       // JoinClasses.belongsTo(Roles);
       JoinClasses.belongsTo(Classes);
       JoinClasses.belongsTo(Roles);
+      JoinClasses.belongsToMany(Sessions, { through: "presences" });
     }
   }
   JoinClasses.init(

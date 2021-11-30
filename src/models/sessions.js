@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // Sessions.belongsToMany(JoinClasses, { through: "presensi" });
       Sessions.belongsTo(Classes);
       Sessions.hasMany(Materials);
+      Sessions.belongsToMany(JoinClasses, { through: "presences" });
     }
   }
   Sessions.init(
@@ -23,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       ClassId: DataTypes.INTEGER,
       namaSesi: DataTypes.STRING,
+      kodeSesi: DataTypes.STRING(6),
       waktuMulai: DataTypes.DATEONLY,
       waktuSelesai: DataTypes.DATEONLY,
       urutanSesi: DataTypes.INTEGER,
