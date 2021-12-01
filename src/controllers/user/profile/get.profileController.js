@@ -1,4 +1,4 @@
-const { Users } = require("../../../models");
+const { Users, MediaSocial } = require("../../../models");
 
 const service = async function (req, res, next) {
   try {
@@ -11,6 +11,12 @@ const service = async function (req, res, next) {
       attributes: {
         exclude: ["password", "status", "createdAt", "updatedAt", "deletedAt"],
       },
+      include: [
+        {
+          model: MediaSocial,
+          attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+        },
+      ],
     });
     return res.json(requestDB);
   } catch (error) {

@@ -10,10 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ Users, Address, MediaSocial, Classes, JoinClasses }) {
-      Users.belongsTo(Address);
-      Users.belongsTo(MediaSocial);
+      Users.hasOne(MediaSocial);
       Users.belongsToMany(Classes, { through: "JoinClasses" });
-      // Users.hasMany(JoinClasses);
     }
   }
   Users.init(
@@ -27,17 +25,21 @@ module.exports = (sequelize, DataTypes) => {
       tempatLahir: DataTypes.STRING,
       tanggalLahir: DataTypes.DATEONLY,
       foto: DataTypes.STRING,
-      noHp: DataTypes.STRING(12),
+      noHp: DataTypes.STRING(14),
       email: DataTypes.STRING,
       password: {
         type: DataTypes.STRING,
         set(value) {
-          this.setDataValue("password", hashSync(value, genSaltSync(10)));
+          this.setDataValue("password", hashSync(value, genSaltSync(1)));
         },
       },
       pendidikanTerakhir: DataTypes.STRING,
       institusi: DataTypes.STRING,
       pekerjaan: DataTypes.STRING,
+      alamat: DataTypes.STRING,
+      kecamatan: DataTypes.STRING,
+      kota: DataTypes.STRING,
+      provinsi: DataTypes.STRING,
       status: DataTypes.ENUM(["admin", "user"]),
     },
     {
