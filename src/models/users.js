@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         set(value) {
-          this.setDataValue("password", hashSync(value, genSaltSync(1)));
+          this.setDataValue("password", hashSync(value, genSaltSync(10)));
         },
       },
       pendidikanTerakhir: DataTypes.STRING,
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       kecamatan: DataTypes.STRING,
       kota: DataTypes.STRING,
       provinsi: DataTypes.STRING,
-      status: DataTypes.ENUM(["admin", "user"]),
+      status: { type: DataTypes.ENUM(["admin", "user"]), defaultValue: "user" },
     },
     {
       sequelize,

@@ -8,26 +8,29 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ JoinClasses, Sessions, Roles, Classes, Users }) {
-      // JoinClasses.belongsToMany(Sessions, { through: "presensi" });
-      // JoinClasses.belongsTo(Roles);
       JoinClasses.belongsTo(Classes);
       JoinClasses.belongsTo(Roles);
-      JoinClasses.belongsToMany(Sessions, { through: "presences" });
+      JoinClasses.belongsToMany(Sessions, {
+        through: "presences",
+        as: "absen",
+      });
     }
   }
   JoinClasses.init(
     {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
       UserId: {
         type: DataTypes.UUID,
-        primaryKey: true,
       },
       ClassId: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
       },
       RoleId: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
       },
     },
     {

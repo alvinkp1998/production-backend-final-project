@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       // Sessions.belongsToMany(JoinClasses, { through: "presensi" });
       Sessions.belongsTo(Classes);
       Sessions.hasMany(Materials);
-      Sessions.belongsToMany(JoinClasses, { through: "presences" });
+      Sessions.belongsToMany(JoinClasses, {
+        through: "presences",
+        as: "absensi",
+      });
     }
   }
   Sessions.init(

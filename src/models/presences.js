@@ -13,13 +13,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   presences.init(
     {
-      JoinClassUserId: {
+      JoinClassId: {
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      sessionId: {
+      SessionId: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
       },
     },
     {
