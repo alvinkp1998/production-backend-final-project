@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ Sessions, JoinClasses, Classes, Materials }) {
-      // Sessions.belongsToMany(JoinClasses, { through: "presensi" });
       Sessions.belongsTo(Classes);
       Sessions.hasMany(Materials);
       Sessions.belongsToMany(JoinClasses, {

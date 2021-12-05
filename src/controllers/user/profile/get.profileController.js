@@ -11,12 +11,6 @@ const service = async function (req, res, next) {
       attributes: {
         exclude: ["password", "status", "createdAt", "updatedAt", "deletedAt"],
       },
-      include: [
-        {
-          model: MediaSocial,
-          attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
-        },
-      ],
     });
     return res.json(requestDB);
   } catch (error) {

@@ -7,6 +7,5 @@ const userJWT = require("../../../middlewares/jwt");
 
 router.get("/", userJWT.checkJWT, getProfile.service);
 router.put("/:id", userJWT.checkJWT, editProfile.service);
-router.post("/", userJWT.checkJWT, editProfile.service);
 
 module.exports = router;

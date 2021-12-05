@@ -9,8 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Users, Address, MediaSocial, Classes, JoinClasses }) {
-      Users.hasOne(MediaSocial);
+    static associate({ Users, Classes }) {
       Users.belongsToMany(Classes, { through: "JoinClasses" });
     }
   }
@@ -41,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
       kota: DataTypes.STRING,
       provinsi: DataTypes.STRING,
       status: { type: DataTypes.ENUM(["admin", "user"]), defaultValue: "user" },
+      instagram: { type: DataTypes.STRING, defaultValue: "-" },
+      twitter: { type: DataTypes.STRING, defaultValue: "-" },
+      linkedIn: { type: DataTypes.STRING, defaultValue: "-" },
+      facebook: { type: DataTypes.STRING, defaultValue: "-" },
     },
     {
       sequelize,
