@@ -1,4 +1,5 @@
 const { Users } = require("../../../models");
+const { body } = require("express-validator");
 
 const service = async function (req, res, next) {
   try {
@@ -10,4 +11,23 @@ const service = async function (req, res, next) {
   }
 };
 
-module.exports = { service };
+const validation = [
+  body("email")
+    .notEmpty()
+    .withMessage("Email tidak boleh kosong")
+    .isEmail()
+    .withMessage("Email tidak valid")
+    .custom((value) => {
+      return Users.findOne({ where: { email: value } }).then((data) => {
+        if (data) {
+          return Promise.reject("Email sudah digunakan");
+        }
+      });
+    }),
+  body("password")
+    .notEmpty()
+    .withMessage("Password tidak boleh kosong")
+    .isLength({ min: 4 }),
+];
+
+module.exports = { service, validation };
