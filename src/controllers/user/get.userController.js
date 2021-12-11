@@ -4,20 +4,7 @@ const service = async function (req, res, next) {
   try {
     const where = {};
     if (req.auth) {
-      const requestDB = await Users.findAll({
-        where,
-        attributes: {
-          exclude: ["password", "createdAt", "updatedAt", "deletedAt"],
-        },
-        include: {
-          model: Classes,
-          attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
-        },
-      });
-      return res.json({
-        msg: "data user berhasil diterima.",
-        data: requestDB[0],
-      });
+      where.id = req.auth.id;
     } else {
       const requestDB = await Users.findAll({
         where,
@@ -25,6 +12,15 @@ const service = async function (req, res, next) {
       });
       return res.json({ msg: "data semua user", data: requestDB });
     }
+
+    const requestDB = await Users.findAll({
+      where,
+      attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+    });
+    return res.json({
+      msg: "data user berhasil diterima.",
+      data: requestDB[0],
+    });
   } catch (error) {
     return res.status(500).json({ msg: error.toString() });
   }

@@ -9,6 +9,7 @@ const sesiRoutes = require("../controllers/sesi/routes");
 const materiRoutes = require("../controllers/materi/routes");
 const profileRoutes = require("../controllers/user/profile/routes");
 const presensiRoutes = require("../controllers/presensi/routes");
+const uploadRoutes = require("../controllers/upload/routes");
 
 router.use("/register", registerRoutes);
 router.use("/login", loginRoutes);
@@ -19,5 +20,6 @@ router.use("/sesi", sesiRoutes);
 router.use("/materi", materiRoutes);
 router.use("/profile", profileRoutes);
 router.use("/presensi", presensiRoutes);
+router.use("/upload", uploadRoutes);
 
 module.exports = router;
