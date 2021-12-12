@@ -1,14 +1,19 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "db_final-project",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "username": "bbygenazakekyd",
+    "password": "eb97cbed4c661760317e1f576b977306028eb34bc841a2af9f9ff3728ca4789f",
+    "database": "dc6umgm17dc97o",
+    "host": "ec2-54-205-121-232.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "port": 5432,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
     "define": {
-      "underscored": true,
-      "timestamp": false,
-      "paranoid": true
+      "underscored": true
     }
   },
   "test": {
