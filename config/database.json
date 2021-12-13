@@ -1,13 +1,14 @@
 {
   "development": {
-    "username": "bacckedmbeulyd",
-    "password": "d5104473d833d5917780c3622cd8fb42791a03eb930077f51442a6173fe710ce",
-    "database": "dc98kl5s1nussu",
-    "host": "ec2-52-201-106-191.compute-1.amazonaws.com",
-    "dialect": "postgres",
-    "port": 5432,
+    "username": "root",
+    "password": null,
+    "database": "db_final-project",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
     "define": {
-      "underscored": true
+      "underscored": true,
+      "paranoid": true,
+      "timestamps": true
     }
   },
   "test": {
@@ -18,10 +19,20 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "bacckedmbeulyd",
+    "password": "d5104473d833d5917780c3622cd8fb42791a03eb930077f51442a6173fe710ce",
+    "database": "dc98kl5s1nussu",
+    "host": "ec2-52-201-106-191.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "port": 5432,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "define": {
+      "underscored": true
+    }
   }
 }
