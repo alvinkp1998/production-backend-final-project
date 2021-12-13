@@ -1,24 +1,5 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "db_final-project",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "define": {
-      "underscored": true,
-      "paranoid": true,
-      "timestamps": true
-    }
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
     "username": "bacckedmbeulyd",
     "password": "d5104473d833d5917780c3622cd8fb42791a03eb930077f51442a6173fe710ce",
     "database": "dc98kl5s1nussu",
@@ -34,5 +15,19 @@
     "define": {
       "underscored": true
     }
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
 }
