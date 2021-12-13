@@ -1,6 +1,6 @@
 const { Users } = require("../../../models");
 const { createJWT } = require("../../../middlewares/jwt");
-const { compareSync } = require("bcrypt");
+const { compareSync } = require("bcryptjs");
 const { body } = require("express-validator");
 
 const service = async function (req, res, next) {
